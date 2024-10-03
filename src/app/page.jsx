@@ -1,12 +1,14 @@
 "use client" // Coloco somente em páginas para usuários
 
+import AddTask from "@/components/AddTask";
 import Task from "@/components/Task";
 import { useState } from "react";
 
 // Components deve iniciar com letra maiuscula
 function Home() {
 
-  const [tasks, setTasks] = useState([
+  // tasks armazena o estado atual do useState e  setTasks é uma função que atualiza o valor
+  const [tarefas, setTasks] = useState([
     // tasks
     {
       id:1,
@@ -28,7 +30,17 @@ function Home() {
     }
   ])
 
-
+  function clicarTarefa(taskId) {
+    const newTasks = tarefas.map((task)=>{
+      // If resumido (a função terminará se a função retornar)
+      if(task.id=== taskId) {
+        //IF Preciso ATUALIZAR ESSA TAREFA 
+        return {...task, isCompleted: !task.isCompleted}};
+        //Não precisa atualizar essa tarefa
+        return task; // Else
+    })
+    setTasks(newTasks);
+  }
 
   return (
     // div vazia
@@ -38,7 +50,11 @@ function Home() {
       <div className="w-[500px] space-y-4">
         <h1 className="text-3xl text-slate-100 font-bold text-center">Gerenciador de Tarefas</h1>
           {/* Usando o component e definindo o valor da propriedade*/}
-        <Task props={"Olá mundo"}/>
+        {/* <Task props={"Olá mundo"}/> */}
+        
+        {/* Propriedades usadas com props.xxx(ex: props.tasks) em outros components */}
+        <Task tasks={tarefas} onTaskClick={clicarTarefa}/>
+        <AddTask/>
       </div>
 
       </div>
