@@ -18,13 +18,13 @@ function Home() {
     },
     {
       id:2,
-      title: "Estudar Programação",
+      title: "Estudar Inglês",
       description: "Estudar Inglês para se tornar um milhonário",
       isCompleted: false,
     },
     {
       id:3,
-      title: "Estudar Programação",
+      title: "Estudar Matemática",
       description: "Estudar Matemática para se tornar um milhonário",
       isCompleted: false,
     }
@@ -42,6 +42,22 @@ function Home() {
     setTasks(newTasks);
   }
 
+  function deletarTarefaPorClick(taskId) {
+    const newTasks = tarefas.filter(task => task.id !== taskId);
+    //function task() {task.id}
+    setTasks(newTasks);
+  }
+
+  function adicionarTarefa(titulo, descricao) {
+    const newTask = {
+      id: tarefas.length + 1, //
+      title: titulo,
+      description: descricao,
+      isCompleted: false,
+    }
+
+  }
+
   return (
     // div vazia
     <>
@@ -53,7 +69,8 @@ function Home() {
         {/* <Task props={"Olá mundo"}/> */}
         
         {/* Propriedades usadas com props.xxx(ex: props.tasks) em outros components */}
-        <Task tasks={tarefas} onTaskClick={clicarTarefa}/>
+        {/* Componenets0 */}
+        <Task tasks={tarefas} onTaskClick={clicarTarefa} onDeleteTaskClick={deletarTarefaPorClick}/>
         <AddTask/>
       </div>
 
