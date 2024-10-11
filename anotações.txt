@@ -1,0 +1,17 @@
+Comandos Usados:
+
+npx create-next-app@latest
+cd my-app-shop
+
+// Dentro da pasta do projeto
+npx next dev    
+
+// instalando o lucide react (biblioteca de icones)
+https://lucide.dev/
+npm install lucide-react
+
+// instalando o UUID
+npm i uuid
+
+// ? parametros
+http://localhost:3001/TaskPage?titulo=Gabriel&descricao=Rodrigues

@@ -2,33 +2,21 @@
 
 import AddTask from "@/components/AddTask";
 import Task from "@/components/Task";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+import { v4 } from "uuid";
 
 // Components deve iniciar com letra maiuscula
 function Home() {
 
   // tasks armazena o estado atual do useState e  setTasks é uma função que atualiza o valor
-  const [tarefas, setTasks] = useState([
-    // tasks
-    {
-      id:1,
-      title: "Estudar Programação",
-      description: "Estudar Programação para se tornar um milhonário",
-      isCompleted: false,
-    },
-    {
-      id:2,
-      title: "Estudar Inglês",
-      description: "Estudar Inglês para se tornar um milhonário",
-      isCompleted: false,
-    },
-    {
-      id:3,
-      title: "Estudar Matemática",
-      description: "Estudar Matemática para se tornar um milhonário",
-      isCompleted: false,
-    }
-  ])
+  const [tarefas, setTasks] = useState(JSON.parse(localStorage.getItem("tarefas")) || []); // parse converte JSON para um objeto. localStorage.getItem() - retorna o valor associado a chave dentro do parenteses
+
+  // Salvar tarefas
+  //  O useEffect é um hook que executa a função passada sempre que a variável tarefas muda.
+  useEffect(() => { 
+    localStorage.setItem("tarefas", JSON.stringify(tarefas)); // localStorage.setItem() -Adiciona o valor no armazenamento local
+  }, [tarefas]);
 
   function clicarTarefa(taskId) {
     const newTasks = tarefas.map((task)=>{
@@ -50,11 +38,15 @@ function Home() {
 
   function adicionarTarefa(titulo, descricao) {
     const newTask = {
-      id: tarefas.length + 1, //
-      title: titulo,
+      // id: tarefas.length + 1,
+      id: v4(), // UUID Gera aleatório, dificil de duplicar
+      title: titulo,  
       description: descricao,
       isCompleted: false,
     }
+
+    // setTasks readiciona as tarefas e a newTask
+    setTasks([...tarefas, newTask])
 
   }
 
@@ -68,10 +60,10 @@ function Home() {
           {/* Usando o component e definindo o valor da propriedade*/}
         {/* <Task props={"Olá mundo"}/> */}
         
-        {/* Propriedades usadas com props.xxx(ex: props.tasks) em outros components */}
-        {/* Componenets0 */}
+        {/* Propriedades serão usadas com props.xxx(ex: props.tasks) em outros components */}
+        {/* Componenets */}
         <Task tasks={tarefas} onTaskClick={clicarTarefa} onDeleteTaskClick={deletarTarefaPorClick}/>
-        <AddTask/>
+        <AddTask onAddTaskSubmit={adicionarTarefa}/> {/* Envia o parametro(adicionarTarefa) para o componente AddTask. Lá o nome do parametro será onAddTaskSubmit */}
       </div>
 
       </div>
