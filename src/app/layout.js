@@ -1,16 +1,27 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import { Patrick_Hand } from "next/font/google" // importando a font
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+// Fontes padrão
+
+// const geistSans = localFont({
+//   src: "./fonts/GeistVF.woff",
+//   variable: "--font-geist-sans",
+//   weight: "100 900",
+// });
+// const geistMono = localFont({
+//   src: "./fonts/GeistMonoVF.woff",
+//   variable: "--font-geist-mono",
+//   weight: "100 900",
+// });
+
+
+// adicionando a fonte 
+const patrick = Patrick_Hand ({
+  subsets: ['latin'], //
+  weight: ['400'], // regular, medium, 
+})
+// Apagar a fonte padrão no arquivo layout
 
 export const metadata = {
   title: "Create Next App",
@@ -19,9 +30,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    // Usando a fonte no site
+    <html lang="en" className={patrick.className}> 
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
       </body>

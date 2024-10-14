@@ -1,5 +1,5 @@
 {/* Component lucide */ }
-import { ChevronRight, Trash } from "lucide-react";
+import { Target, Trash } from "lucide-react";
 // import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -24,7 +24,7 @@ function Task(props) {
   return (
     <>
       {/* space = margin */}
-      <ul className="space-y-4 p-6 bg-slate-200 rounded shadow">
+      <ul className="space-y-4 p-6 bg-slate-200 bg-opacity-40 rounded shadow">
         {props.tasks.map((task) => (
           // flex deixa os elementos um do lado do outro
           <li key={task.id} className="flex gap-2">
@@ -33,19 +33,19 @@ function Task(props) {
               // onClick Recebe uma função
               onClick={() => props.onTaskClick(task.id)}
               // text-left - align-itens    // rounded-md = border radius
-              className="bg-slate-400 text-left w-full text-white p-2 rounded-md">
+              className="bg-green-500 text-left w-full text-white p-2 rounded-md">
               {task.title}
-              {task.isCompleted ? " - Complete" : " - Incomplete"}
+
             </button>
             {/* <Link href="/TaskPage"> */}
-              <button className="bg-slate-400 p-2 rounded-md text-white"
+              <button className="bg-green-500 p-2 rounded-md text-white"
               onClick={()=>onSeeDetailsClick(task)}
               >
                 {/* Component lucide */}
-                <ChevronRight />
+                <Target />
               </button>
             {/* </Link> */}
-            <button onClick={() => props.onDeleteTaskClick(task.id)} className="bg-slate-400 p-2 rounded-md text-white"><Trash /></button>
+            <button onClick={() => props.onDeleteTaskClick(task.id)} className="bg-green-500 p-2 rounded-md text-white"><Trash /></button>
           </li>
         ))}
       </ul>
